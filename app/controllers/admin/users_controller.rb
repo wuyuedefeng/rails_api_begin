@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
 
-  def index
-
+  def create
+    super do end
   end
 end

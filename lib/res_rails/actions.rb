@@ -2,33 +2,43 @@ module ResRails
   module Actions
     include InstanceMethods
     def index
-      self.resources = find_resources
+      @resources = find_resources
     end
 
     def show
-      self.resource = find_resource
+      @resource = find_resource
     end
 
-    def create
+    def create &block
       form = "#{resource_class_name}Form::Create".constantize.new(resource_class.new)
       if form.validate(params) && form.save
-        render json: { message: :successfully_create }, status: 200
+        @resource = form.model
+        if block_given?
+          yield @resource
+        else
+          render json: { message: :successfully_create }, status: 200
+        end
       else
         render json: { message: form.errors.full_messages.first }, status: 422
       end
     end
 
-    def update
+    def update &block
       form = "#{resource_class_name}Form::Update".constantize.new(resource_class.find(params[:id]))
       if form.validate(params) && form.save
-        render json: { message: :successfully_create }, status: 200
+        @resource = form.model
+        if block_given?
+          yield @resource
+        else
+          render json: { message: :successfully_create }, status: 200
+        end
       else
         render json: { message: form.errors.full_messages.first }, status: 422
       end
     end
 
     def destroy
-      self.resource = destroy_resource
+      @resource = destroy_resource
     end
 
     protected
