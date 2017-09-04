@@ -30,6 +30,8 @@ gem 'devise'
 # Form object decoupled from models.
 gem 'reform'
 gem 'reform-rails'
+# 分页
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,8 +1,14 @@
 module ResRails
   module Actions
     include InstanceMethods
-    def index
-      @resources = find_resources
+    include Paginate
+
+    def index &block
+      resources = find_resources
+      if block_given?
+        resources = yield(resources)
+      end
+      @resources = paginate resources
     end
 
     def show
