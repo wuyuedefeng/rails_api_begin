@@ -32,6 +32,8 @@ gem 'reform'
 gem 'reform-rails'
 # 分页
 gem 'kaminari'
+# 搜索
+gem 'ransack', github: 'activerecord-hackery/ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,7 +1,8 @@
 module ResRails
   module Actions
     include InstanceMethods
-    include Paginate
+    include Pagination
+    include Search
 
     def index &block
       resources = find_resources
@@ -50,7 +51,7 @@ module ResRails
     protected
 
     def find_resources
-      resource_class.all
+      resource_class.ransack(prepare_search_condition).result
     end
 
     def find_resource(id = nil)

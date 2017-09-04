@@ -1,4 +1,4 @@
-module ResRails::Paginate
+module ResRails::Pagination
 
   protected
   def paginate resources = nil
