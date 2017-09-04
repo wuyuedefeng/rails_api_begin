@@ -12,7 +12,6 @@ module ResRails
     def create &block
       form = "#{resource_class_name}Form::#{action_name.classify}".constantize.new(resource_class.new)
       if form.validate(params) && form.save
-        p '========================'
         @resource = form.model
         if block_given?
           yield @resource

@@ -1,3 +1,3 @@
 class Admin::BaseController < ApplicationController
-  include ResRails
+  include ResRails::ResRails
 end
