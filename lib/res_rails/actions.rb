@@ -10,8 +10,9 @@ module ResRails
     end
 
     def create &block
-      form = "#{resource_class_name}Form::Create".constantize.new(resource_class.new)
+      form = "#{resource_class_name}Form::#{action_name.classify}".constantize.new(resource_class.new)
       if form.validate(params) && form.save
+        p '========================'
         @resource = form.model
         if block_given?
           yield @resource
@@ -19,12 +20,12 @@ module ResRails
           render json: { message: :successfully_create }, status: 200
         end
       else
-        render json: { message: form.errors.full_messages.first }, status: 422
+        render json: { message: form.errors.full_messages.first || form.model.errors.full_messages.first }, status: 422
       end
     end
 
     def update &block
-      form = "#{resource_class_name}Form::Update".constantize.new(resource_class.find(params[:id]))
+      form = "#{resource_class_name}Form::#{action_name.classify}".constantize.new(resource_class.find(params[:id]))
       if form.validate(params) && form.save
         @resource = form.model
         if block_given?
@@ -33,7 +34,7 @@ module ResRails
           render json: { message: :successfully_create }, status: 200
         end
       else
-        render json: { message: form.errors.full_messages.first }, status: 422
+        render json: { message: form.errors.full_messages.first || form.model.errors.full_messages.first }, status: 422
       end
     end
 
