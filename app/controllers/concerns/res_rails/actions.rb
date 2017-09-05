@@ -11,6 +11,9 @@ module ResRails
       end
       @resources = paginate resources
     end
+    alias_method :res_index, :index
+    # or in ruby > 2.2, child can call parent method use below method
+    # method(:index).super_method.call
 
     def show
       @resource = find_resource
@@ -44,8 +47,13 @@ module ResRails
       end
     end
 
-    def destroy
+    def destroy &block
       @resource = destroy_resource
+      if block_given?
+        yield @resource
+      else
+        render json: { message: :successfully_destroy }, status: 200
+      end
     end
 
     protected
