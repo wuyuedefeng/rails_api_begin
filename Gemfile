@@ -34,6 +34,8 @@ gem 'reform-rails'
 gem 'kaminari'
 # 搜索
 gem 'ransack', github: 'activerecord-hackery/ransack'
+# 环境变量
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
