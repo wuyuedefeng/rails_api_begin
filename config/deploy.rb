@@ -2,6 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/multistage'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -10,7 +11,7 @@ require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :application_name, 'eatdrink'
-set :domain, 'deploy@47.93.21.147'
+# set :domain, 'deploy@47.93.21.147'
 set :deploy_to, '/mnt/www/eatdrink'
 set :repository, 'git@github.com:wuyuedefeng/rails_api_begin.git'
 set :branch, 'master'
@@ -62,7 +63,7 @@ task :deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    # invoke :'rails:db_create' # 仅首次部署打开，创建数据库
+    invoke :'rails:db_create' # 仅首次部署打开，创建数据库
     invoke :'rails:db_migrate'
     # invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'

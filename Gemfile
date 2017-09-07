@@ -53,6 +53,7 @@ group :development do
   
   # deploy
   gem 'mina'
+  gem 'mina-multistage', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
