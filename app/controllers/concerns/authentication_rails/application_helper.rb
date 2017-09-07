@@ -17,7 +17,7 @@ module AuthenticationRails::ApplicationHelper
   end
 
   def valid_authenticate_token? token
-    if (split_token = token&.split('.')) && split_token.length == 2 && sign_authenticate_token(split_token[0]) == token
+    if (split_token = token&.split('.')) && split_token.length == 2 && ActiveSupport::SecurityUtils.secure_compare(sign_authenticate_token(split_token[0]), token)
       @current_user = split_token[0] && User.find_by(authentication_token: split_token[0])
     end
   end

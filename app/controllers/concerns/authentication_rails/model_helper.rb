@@ -5,6 +5,11 @@ module AuthenticationRails::ModelHelper
     end
   end
 
+  def reset_authentication_token!
+    generate_authentication_token
+    save!
+  end
+
   def generate_authentication_token
     self.authentication_token = Devise.friendly_token 30
     generate_authentication_token if User.exists?(authentication_token: self.authentication_token)
