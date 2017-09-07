@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://gems.ruby-china.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -50,6 +50,9 @@ group :development do
   # better errors
   gem "better_errors"
   gem "binding_of_caller"
+  
+  # deploy
+  gem 'mina'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
