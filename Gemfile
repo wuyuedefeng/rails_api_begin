@@ -36,6 +36,9 @@ gem 'kaminari'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 # 环境变量
 gem 'figaro'
+# xlsx
+gem 'rubyXL'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
